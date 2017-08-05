@@ -9,3 +9,7 @@ I want to set the name and surname feild to be capitlised, and the email feild t
 
 I'm thinking there's a couple of CREATE TRIGGER... BEFORE scripts in the MySQL. 
 feeling a little bit disoriented.
+
+Added more code to the user_upload file...looks like a dog's breakfast
+
+...sigh.
