@@ -28,7 +28,9 @@ if ($conn->query($sql) === TRUE) {
 $file = fopen("users.csv","r");
 print_r(fgetcsv($file));
 
-DELIMITER $$
+//sql to creat trigger
+$sql = "
+(DELIMITER $$
 CREATE TRIGGER name_format 
     BEFORE INSERT ON users
     FOR EACH ROW 
@@ -39,8 +41,10 @@ BEGIN
      	Name = OLD.Name,
        	Surname = OLD.Surname;
 END$$
-DELIMITER ;
+DELIMITER") ;
 
+//sql to open CSV file
+$sql = "
 if (($handle = fopen("users.csv", "r")) !== FALSE) {
 			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
 				$num = count($data);
@@ -50,7 +54,7 @@ if (($handle = fopen("users.csv", "r")) !== FALSE) {
 			}
 			fclose($handle);
 		}
-fclose($file);
+fclose($file)";
 
 $conn->close();
 
